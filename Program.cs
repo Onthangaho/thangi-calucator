@@ -12,11 +12,22 @@ Console.Write("Enter an operator (+, -, *, /): ");
 char operatorChar = char.Parse(Console.ReadLine()!);
 Console.Write("Enter another number: ");
 int num2= int.Parse(Console.ReadLine()!);
-CalculationRequest request = new CalculationRequest(num1, num2, Calculator.Operation.Add); ; 
-double Result = calculator.Calculate(request.Num1, request.Num2, request.Operation);
+// Using CalculationRequest record to encapsulate the calculation details so we can easily pass them around without needing multiple parameters.
+CalculationRequest request = new CalculationRequest(num1, num2, operatorChar switch
+{
+    '+' => Calculator.Operation.Add,
+    '-' => Calculator.Operation.Subtract,
+    '*' => Calculator.Operation.Multiply,
+    '/' => Calculator.Operation.Divide,
+    _ => throw new InvalidOperationException("Invalid operation")
+});
+double result = calculator.Calculate(request.Num1, request.Num2, request.Operation);
+Console.WriteLine($"Result: {num1} {operatorChar} {num2} = {result}");
+
+
 
     
-var result = 0.0;
+
 
 switch(operatorChar)
 {
