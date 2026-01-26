@@ -1,0 +1,15 @@
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\bin\Debug\net8.0\thangi-calucator.exe
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\bin\Debug\net8.0\thangi-calucator.deps.json
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\bin\Debug\net8.0\thangi-calucator.runtimeconfig.json
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\bin\Debug\net8.0\thangi-calucator.dll
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\bin\Debug\net8.0\thangi-calucator.pdb
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\obj\Debug\net8.0\thangi-calucator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\obj\Debug\net8.0\thangi-calucator.AssemblyInfoInputs.cache
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\obj\Debug\net8.0\thangi-calucator.AssemblyInfo.cs
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\obj\Debug\net8.0\thangi-calucator.csproj.CoreCompileInputs.cache
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\obj\Debug\net8.0\thangi-calucator.sourcelink.json
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\obj\Debug\net8.0\thangi-calucator.dll
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\obj\Debug\net8.0\refint\thangi-calucator.dll
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\obj\Debug\net8.0\thangi-calucator.pdb
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\obj\Debug\net8.0\thangi-calucator.genruntimeconfig.cache
+C:\Users\Training Center 1\Onthangaho\thangi-calucator\obj\Debug\net8.0\ref\thangi-calucator.dll
