@@ -4,78 +4,90 @@
 
 
 
-Calculator calculator = new Calculator("Thangis Calculator");
-Console.WriteLine($"======Welcome to {calculator.Name}======\n");
-Console.Write("Enter your name: ");
-int num1= int.Parse(Console.ReadLine()!);
-Console.Write("Enter an operator (+, -, *, /): ");
-char operatorChar = char.Parse(Console.ReadLine()!);
-Console.Write("Enter another number: ");
-int num2= int.Parse(Console.ReadLine()!);
-// Using CalculationRequest record to encapsulate the calculation details so we can easily pass them around without needing multiple parameters.
-CalculationRequest request = new CalculationRequest(num1, num2, operatorChar switch
+/// <summary>
+/// Program.cs is the ENTRY POINT.
+/// 
+/// Its job is to:
+/// - Collect input
+/// - Call domain logic
+/// - Show output
+/// 
+/// It should NOT:
+/// - Contain business rules
+/// - Make complex decisions
+/// 
+/// In the booking system:
+/// - This is like a controller or API endpoint
+/// </summary>
+Console.WriteLine("=== Calculator Demo ===");
+
+// Create the domain object
+// This is similar to creating a service in a backend system
+var calculator = new Calculator("Standard Calculator");
+
+// Collect user input (UI concern)
+Console.Write("Enter first number: ");
+int a = int.Parse(Console.ReadLine()!);
+
+Console.Write("Enter second number: ");
+int b = int.Parse(Console.ReadLine()!);
+
+// UI presents choices
+Console.WriteLine("Choose operation:");
+Console.WriteLine("1 - Add");
+Console.WriteLine("2 - Subtract");
+Console.WriteLine("3 - Multiply");
+Console.WriteLine("4 - Divide");
+
+Console.Write("Selection: ");
+int selection = int.Parse(Console.ReadLine()!);
+
+// Translate UI input into a BUSINESS RULE
+// UI values should never leak into the domain
+OperationType operation = selection switch
 {
-    '+' => Calculator.Operation.Add,
-    '-' => Calculator.Operation.Subtract,
-    '*' => Calculator.Operation.Multiply,
-    '/' => Calculator.Operation.Divide,
-    _ => throw new InvalidOperationException("Invalid operation")
-});
-double result = calculator.Calculate(request.Num1, request.Num2, request.Operation);
-Console.WriteLine($"Result: {num1} {operatorChar} {num2} = {result}");
+    1 => OperationType.Add,
+    2 => OperationType.Subtract,
+    3 => OperationType.Multiply,
+    4 => OperationType.Divide,
+    _ => throw new InvalidOperationException("Invalid selection")
+};
 
+// Create a request object (data only)
+// In booking: this would be a BookingRequest
+var request = new CalculationRequest(a, b, operation);
 
+// Apply behaviour
+// Program.cs does not calculate anything itself
+int result = calculator.Calculate(
+    request.A,
+    request.B,
+    request.Operation
+);
 
-    
-
-
-switch(operatorChar)
+// Output result (UI concern)
+Console.WriteLine();
+Console.WriteLine($"Calculator: {calculator.Name}");
+Console.WriteLine($"Result: {result}");
+Console.WriteLine($"Last Result Stored: {calculator.LastResult}");
+//view calculation history
+foreach (var record in calculator.CalculationHistory)
 {
-    case '+':
-        result = calculator.Calculate(num1, num2, Calculator.Operation.Add) ;
-        break;
-    case '-':
-        result = calculator.Calculate(num1, num2, Calculator.Operation.Subtract);
-        break;
-    case '*':
-        result = calculator.Calculate(num1, num2, Calculator.Operation.Multiply);
-        break;
-    case '/':
-        try
-        {
-            result = calculator.Calculate(num1, num2, Calculator.Operation.Divide);
-            break;
-        }
-        catch (DivideByZeroException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-    default:
-        Console.WriteLine("Invalid operator");
-        return;
+    Console.WriteLine($"History - A: {record.A}, B: {record.B}, Operation: {record.Operation}");
 }
-Console.WriteLine($"Result: {num1} {operatorChar} {num2} = {result}");
+//to see addition operations only
+var additions = calculator.GetAdditionOperations();
 
-/*
-switch(operatorChar)
+if (additions.Count == 0)
 {
-    case '+':
-        result = num1 + num2;
-        break;
-    case '-':
-        result = num1 - num2;
-        break;
-    case '*':
-        result = num1 * num2;
-        break;
-    case '/':
-        result = num1 / num2;
-        break;
-    default:
-        Console.WriteLine("Invalid operator");
-        return;
+    Console.WriteLine("No addition operations found.");
+}
+else
+{
+    Console.WriteLine("Addition Operations:");
+    foreach (var record in additions)
+    {
+        Console.WriteLine($"A: {record.A}, B: {record.B}, Operation: {record.Operation}");
+    }
 }
 
-
-Console.WriteLine($"Result: {num1} {operatorChar} {num2} = {result}");*/
