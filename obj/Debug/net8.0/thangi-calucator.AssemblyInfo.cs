@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("thangi-calucator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f695e05394dac003d204477dace99203a6f58203")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1319774319c0a058b21e6a1ec5caba2b2cbd30b")]
 [assembly: System.Reflection.AssemblyProductAttribute("thangi-calucator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("thangi-calucator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

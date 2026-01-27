@@ -23,6 +23,11 @@ public class Calculator
     /// 
     /// This protects the object from invalid changes.
     /// </summary>
+
+    private readonly List<CalculationRequest> _calculationHistory = new();
+
+
+    public IReadOnlyList<CalculationRequest> CalculationHistory { get { return _calculationHistory.AsReadOnly(); } }
     public int LastResult { get; private set; }
 
     /// <summary>
@@ -42,7 +47,11 @@ public class Calculator
 
         Name = name;
     }
-
+    // Provide a method to get a copy of the calculation history as a read-only list so that external code cannot modify the internal list
+    public IReadOnlyList<CalculationRequest> GetCopyOfCalculationHistory()
+    {
+        return _calculationHistory.ToList().AsReadOnly();
+    }
     /// <summary>
     /// This method applies business rules.
     /// 
@@ -71,7 +80,90 @@ public class Calculator
             // This should never happen if enums are used correctly
             _ => throw new InvalidOperationException("Invalid operation")
         };
+        // Store calculation in history as a record after calculation has been performed
+        CalculationRequest request = new CalculationRequest(a, b, operation);
+        _calculationHistory.Add(request);
 
         return LastResult;
+    }
+    //Get the additions operations that were done on this calculator using LINQ query syntax
+    public List<CalculationRequest> GetAdditionOperationsLinq()
+    {
+        List<CalculationRequest> additions = (from record in _calculationHistory
+                                              where record.Operation == OperationType.Add
+                                              select record).ToList();
+        return additions;
+    }
+    //Get the additions operations that were done on this calculator using LINQ and lambda expression
+    public List<CalculationRequest> GetAdditionOperations()
+    {
+        return _calculationHistory.Where(r => r.Operation == OperationType.Add).ToList();
+    }
+
+    public List<CalculationRequest> ReturnDivide()
+    {
+        var divisions = _calculationHistory.Where(r => r.Operation == OperationType.Divide).ToList();
+        return divisions;
+    }
+
+    //Get the additions operations using a loop
+    public List<CalculationRequest> GetAdditionOperationsLoop()
+    {
+        List<CalculationRequest> additions = new List<CalculationRequest>();
+        foreach (var record in _calculationHistory)
+        {
+            if (record.Operation == OperationType.Add)
+            {
+                additions.Add(record);
+            }
+        }
+        return additions;
+    }
+
+
+    // has division ever been used
+    public bool HasDivisionBeenUsed()
+    {
+        bool isUsed = false;
+        foreach (var record in _calculationHistory)
+        {
+            if (record.Operation == OperationType.Divide)
+            {
+                isUsed = true;
+            }
+        }
+        return isUsed;
+    }
+
+    //has division ever been used using LINQ
+    public bool HasDivisionBeenUsedLinq()
+    {
+        bool hasDivision = _calculationHistory.Any(r => r.Operation == OperationType.Divide);
+        return hasDivision;
+    }
+
+    //writing custom Exceptions
+    public double Divide(CalculationRequest request1)
+    {
+        if (request1.B == 0)
+        {
+            throw new DivideByZeroException("Cannot divide by zero.");
+        }
+        return (double)request1.A / request1.B;
+    }
+
+    // Group our caclulation requests by operation type
+    public Dictionary<OperationType, List<CalculationRequest>> GroupCalculationsByOperation()
+    {
+        Dictionary<OperationType, List<CalculationRequest>> groupingCalculationsRequests = new Dictionary<OperationType, List<CalculationRequest>>();
+        foreach (CalculationRequest record in _calculationHistory)
+        {
+            if (!groupingCalculationsRequests.ContainsKey(record.Operation))
+            {
+                groupingCalculationsRequests[record.Operation] = new List<CalculationRequest>();
+            }
+            groupingCalculationsRequests[record.Operation].Add(record);
+        }
+        return groupingCalculationsRequests;
     }
 }

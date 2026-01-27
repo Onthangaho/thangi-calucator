@@ -70,3 +70,24 @@ Console.WriteLine();
 Console.WriteLine($"Calculator: {calculator.Name}");
 Console.WriteLine($"Result: {result}");
 Console.WriteLine($"Last Result Stored: {calculator.LastResult}");
+//view calculation history
+foreach (var record in calculator.CalculationHistory)
+{
+    Console.WriteLine($"History - A: {record.A}, B: {record.B}, Operation: {record.Operation}");
+}
+//to see addition operations only
+var additions = calculator.GetAdditionOperations();
+
+if (additions.Count == 0)
+{
+    Console.WriteLine("No addition operations found.");
+}
+else
+{
+    Console.WriteLine("Addition Operations:");
+    foreach (var record in additions)
+    {
+        Console.WriteLine($"A: {record.A}, B: {record.B}, Operation: {record.Operation}");
+    }
+}
+
