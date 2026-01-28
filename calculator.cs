@@ -1,3 +1,7 @@
+using System.ComponentModel;
+using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
+
 /// <summary>
 /// Owns calculator behaviour and internal state.
 /// 
@@ -24,6 +28,7 @@ public class Calculator
 
     public Calculator(string name)
     {
+        //first line of defense - guard clause so that invalid calculator cannot be created
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Calculator must have a name.");
 
@@ -92,9 +97,24 @@ public class Calculator
         return _history.Any(r => r.Operation == OperationType.Divide);
     }
 
-    public CalculationRequest? GetLastCalculation()
+    public CalculationRequest? GetLastMultiplication()
     {
-        return _history.LastOrDefault();
+
+        
+        CalculationRequest request = _history.LastOrDefault(record => record.Operation == OperationType.Multiply)!;
+
+
+        return request;
+
+    }
+
+    public CalculationRequest GetLastCalculation()
+    {
+        //guard clause for empty history
+        if (_history.Count == 0)
+            throw new CalculatorHistoryException();
+        CalculationRequest request = _history.Last();
+        return request;
     }
 
     public IEnumerable<CalculationRequest> GetByOperation(OperationType operation)
@@ -123,4 +143,34 @@ public class Calculator
 
         return grouped;
     }
+
+    public async Task SaveHistoryAsync( string filePath)
+    {
+        List<CalculationRequest> snapshot = _history.ToList();
+        // Serialize the snapshot to JSON so that it can be saved to a file as text 
+        //convert list to json string that json understands
+        string json = JsonSerializer.Serialize(snapshot);
+        // Write the JSON string to the specified file asynchronously so that it does not block the main thread if the file operation takes time 
+        await File.WriteAllTextAsync(filePath, json);
+
+    }
+    public async Task<List<CalculationRequest>> LoadHistory(string filePath)
+    {
+        if (!File.Exists(filePath))
+        {
+            throw new Exception("This file does not exist");
+        }
+        
+        else
+        {
+           string json = await File.ReadAllTextAsync(filePath);
+           List<CalculationRequest> calculations = [];
+            calculations =  JsonSerializer.Deserialize<List<CalculationRequest>>(json)! ?? new List<CalculationRequest>();
+           return calculations;
+        }
+       
+    }
+
+   
+    
 }

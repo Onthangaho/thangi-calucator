@@ -1,26 +1,30 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+
 // See https://aka.ms/new-console-template for more information
 
 
 
+static async Task Main(string[] args)
+{
 
-/// <summary>
-/// Program.cs is the ENTRY POINT.
-/// 
-/// Its job is to:
-/// - Collect input
-/// - Call domain logic
-/// - Show output
-/// 
-/// It should NOT:
-/// - Contain business rules
-/// - Make complex decisions
-/// 
-/// In the booking system:
-/// - This is like a controller or API endpoint
-/// </summary>
+
 Console.WriteLine("=== Calculator – End of Day 2 (Defensive Copy Version) ===");
 
+try
+{
+    var calculator = new Calculator("Training Calculator");
+    CalculationRequest req = calculator.GetLastCalculation();
+   await calculator.SaveHistoryAsync("calculationHistory.json");
+   Console .WriteLine("Calculation history saved successfully.");
+    //Console.WriteLine($"This the last operation: {req.A} {req.Operation} {req.B}");
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error Occurred: " + ex.Message);
+}
+/*
 var calculator = new Calculator("Training Calculator");
 
 calculator.Calculate(10, 5, OperationType.Add);
@@ -52,5 +56,5 @@ if (last != null)
     Console.WriteLine($"Last calculation: {last.A} {last.Operation} {last.B}");
 }
 
-Console.WriteLine("\n=== End ===");
-    
+Console.WriteLine("\n=== End ===");*/
+}
