@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Training Center 1\\Onthangaho\\thangi-calucator\\thangi-calucator.csproj": {}
+    "D:\\Study broh\\Bitcube trainee program\\C# practice\\thangi-calucator\\thangi-calucator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Training Center 1\\Onthangaho\\thangi-calucator\\thangi-calucator.csproj": {
+    "D:\\Study broh\\Bitcube trainee program\\C# practice\\thangi-calucator\\thangi-calucator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Training Center 1\\Onthangaho\\thangi-calucator\\thangi-calucator.csproj",
+        "projectUniqueName": "D:\\Study broh\\Bitcube trainee program\\C# practice\\thangi-calucator\\thangi-calucator.csproj",
         "projectName": "thangi-calucator",
-        "projectPath": "C:\\Users\\Training Center 1\\Onthangaho\\thangi-calucator\\thangi-calucator.csproj",
-        "packagesPath": "C:\\Users\\Training Center 1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Training Center 1\\Onthangaho\\thangi-calucator\\obj\\",
+        "projectPath": "D:\\Study broh\\Bitcube trainee program\\C# practice\\thangi-calucator\\thangi-calucator.csproj",
+        "packagesPath": "C:\\Users\\Thangi\\.nuget\\packages\\",
+        "outputPath": "D:\\Study broh\\Bitcube trainee program\\C# practice\\thangi-calucator\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Training Center 1\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Thangi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -37,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -58,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
