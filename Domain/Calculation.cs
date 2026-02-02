@@ -2,17 +2,8 @@ using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 
-/// <summary>
-/// Owns calculator behaviour and internal state.
-/// 
-/// This class:
-/// - Performs calculations
-/// - Applies business rules
-/// - Maintains history
-/// 
-/// Booking analogy:
-/// similar to a booking logic / rules component.
-/// </summary>
+namespace thangi_calucator
+{   
 public class Calculation
 {
        public Guid Id { get; }
@@ -36,5 +27,6 @@ public class Calculation
             CreatedAt = DateTime.UtcNow;
         }
     }
+}
    
     

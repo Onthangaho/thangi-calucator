@@ -1,3 +1,4 @@
+namespace thangi_calucator;
 
 /// <summary>
 /// This enum represents the ONLY operations our calculator allows.
