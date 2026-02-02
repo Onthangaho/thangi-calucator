@@ -1,60 +1,21 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using thangi_calucator;
+using thangi_calucator.Persistence;
 
-// See https://aka.ms/new-console-template for more information
+var store = new FileCalculationStore("Data/calculations.json");
+var calculator = new CalculatorService(store);
 
+await calculator.CalculateAsync(
+    new CalculationRequest(10, 5, OperationType.Add));
 
+await calculator.CalculateAsync(
+    new CalculationRequest(20, 4, OperationType.Divide));
 
-static async Task Main(string[] args)
+var history = await calculator.GetAllAsync();
+
+foreach (var calc in history)
 {
-
-
-Console.WriteLine("=== Calculator – End of Day 2 (Defensive Copy Version) ===");
-
-try
-{
-    var calculator = new Calculator("Training Calculator");
-    CalculationRequest req = calculator.GetLastCalculation();
-   await calculator.SaveHistoryAsync("calculationHistory.json");
-   Console .WriteLine("Calculation history saved successfully.");
-    //Console.WriteLine($"This the last operation: {req.A} {req.Operation} {req.B}");
-}
-catch (Exception ex)
-{
-    Console.WriteLine("Error Occurred: " + ex.Message);
-}
-/*
-var calculator = new Calculator("Training Calculator");
-
-calculator.Calculate(10, 5, OperationType.Add);
-calculator.Calculate(20, 4, OperationType.Divide);
-calculator.Calculate(7, 3, OperationType.Multiply);
-
-// ---------------------------------
-// HISTORY ACCESS (COPY)
-// ---------------------------------
-var historySnapshot = calculator.GetHistory();
-
-Console.WriteLine("\n--- Calculation History (Snapshot) ---");
-foreach (var request in historySnapshot)
-{
-    Console.WriteLine($"{request.A} {request.Operation} {request.B}");
-}
-
-// Even if someone modifies this list,
-// it does NOT affect the calculator.
-// (Try clearing it to prove the point.)
-// historySnapshot.Clear(); // <-- does NOT break the calculator
-
-Console.WriteLine("\n--- Business Questions ---");
-Console.WriteLine($"Has division been used? {calculator.HasUsedDivision()}");
-
-var last = calculator.GetLastCalculation();
-if (last != null)
-{
-    Console.WriteLine($"Last calculation: {last.A} {last.Operation} {last.B}");
-}
-
-Console.WriteLine("\n=== End ===");*/
+    Console.WriteLine($"{calc.Left} {calc.Operation} {calc.Right} = {calc.Result}");
 }
