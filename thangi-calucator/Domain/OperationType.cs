@@ -14,7 +14,7 @@ namespace thangi_calucator;
 /// </summary>
 public enum OperationType
 {
-    Add,
+    Add ,
     Subtract,
     Multiply,
     Divide

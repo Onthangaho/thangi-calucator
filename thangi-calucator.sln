@@ -1,24 +1,28 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.5.2.0
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "thangi-calucator", "thangi-calucator.csproj", "{52152915-C84D-D380-4E9A-84BC721A32C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "thangi-calucator", "thangi-calucator\thangi-calucator.csproj", "{F21D8F00-1DA3-49B6-85B6-6950CD7B65CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{C0696274-86F2-47F3-9E22-8C0F2C4034B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{52152915-C84D-D380-4E9A-84BC721A32C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52152915-C84D-D380-4E9A-84BC721A32C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52152915-C84D-D380-4E9A-84BC721A32C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52152915-C84D-D380-4E9A-84BC721A32C1}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {DF8E5F45-BB04-40EE-A138-625F8F13673F}
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F21D8F00-1DA3-49B6-85B6-6950CD7B65CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F21D8F00-1DA3-49B6-85B6-6950CD7B65CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F21D8F00-1DA3-49B6-85B6-6950CD7B65CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F21D8F00-1DA3-49B6-85B6-6950CD7B65CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0696274-86F2-47F3-9E22-8C0F2C4034B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0696274-86F2-47F3-9E22-8C0F2C4034B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0696274-86F2-47F3-9E22-8C0F2C4034B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0696274-86F2-47F3-9E22-8C0F2C4034B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

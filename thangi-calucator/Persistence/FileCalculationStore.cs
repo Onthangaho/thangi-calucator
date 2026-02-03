@@ -26,11 +26,18 @@ namespace thangi_calucator.Persistence
             // If the file does not exist, return an empty list
             if (!File.Exists(_filePath))
             {
+
                 return new List<Calculation>();
             }
      
             // Read the file and deserialize the calculations 
             var json = await File.ReadAllTextAsync(_filePath);
+             
+             //if the file is empty or contains only whitespace, return an empty list
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                return new List<Calculation>();
+            }
             // Handle empty file case
             return JsonSerializer.Deserialize<List<Calculation>>(json) ?? new List<Calculation>();
         }
