@@ -27,11 +27,18 @@ namespace APi.controllers
             return Ok(calculations);
         }
         [HttpPost]
-        public async Task<IActionResult> Calculate(CalculationRequest request)
+        public async Task<IActionResult> Calculate([FromBody] CreateCalculationDto dto)
         {
-            
+            if (!ModelState.IsValid)
+            {
+                
+                return BadRequest(ModelState);
+            }
+            else{
+            CalculationRequest request = new(dto.left,dto.right,dto.Operand);
             var results = await _calculator.CalculateAsync(request);
             return Ok(results);
+            }
         }
     }
 }

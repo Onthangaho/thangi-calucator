@@ -3,11 +3,18 @@ using thangi_calucator.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var dataDirectory = Path.Combine(
+    builder.Environment.ContentRootPath, "Data");
+
+builder.Services.AddSingleton<ICalculationStore>(
+    new FileCalculationStore(dataDirectory)
+
+);
 // Add services to the container.
 builder.Services.AddControllers();// tells ASP.NET that this app will use controllers as entry points
 
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<ICalculationStore> (new FileCalculationStore("Data/calculation.json"));
+
 builder.Services.AddSingleton<CalculatorService>();
 
 var app = builder.Build();
