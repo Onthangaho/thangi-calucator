@@ -1,44 +1,57 @@
 using thangi_calucator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-namespace APi.controllers
-{
-    
 
+
+
+namespace API.controllers
+{
     [ApiController]
     [Route("api/calculations")]
-    public class CalculationsController: ControllerBase
+    public class CalculationsController : ControllerBase
     {
-        
         private readonly CalculatorService _calculator;
-
-        //registering the CalculatorService via Dependency Injection so that it can be used in this controller
 
         public CalculationsController(CalculatorService calculator)
         {
-            _calculator=calculator;
+            _calculator = calculator;
         }
 
-        [HttpGet]//GET /api/calculations
-        public async Task<IActionResult> GetAll()
-        {
-            var calculations = await _calculator.GetAllAsync();
-
-            return Ok(calculations);
-        }
-        [HttpPost]
+        /*  [HttpGet] //GET /api/calculations
+          public async Task<IActionResult> GetAll()
+          {
+              var calculations = await _calculator.GetAllAsync();
+              return Ok(calculations);
+          }
+         */
+        [HttpPost] //POST /api/calculations
         public async Task<IActionResult> Calculate([FromBody] CreateCalculationDto dto)
         {
-            if (!ModelState.IsValid)
+            var request = new CalculationRequest(
+                dto.Left,
+                dto.Right,
+                dto.Operand
+                );
+            var calculation = await _calculator.CalculateAsync(request);
+
+            var response = new CalculationResultDto
             {
-                
-                return BadRequest(ModelState);
-            }
-            else{
-            CalculationRequest request = new(dto.left,dto.right,dto.Operand);
-            var results = await _calculator.CalculateAsync(request);
-            return Ok(results);
-            }
+                Result = calculation.Result,
+                Operation = calculation.Operation.ToString()
+            };
+
+            return Ok(response);
+
         }
+
+
+
+
+
+
+
+
+
     }
+
 }

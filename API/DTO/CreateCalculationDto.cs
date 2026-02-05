@@ -5,10 +5,10 @@ public class CreateCalculationDto
 {
 
     [Required]
-    public double left { get; set; }
+    public double Left { get; set; }
 
     [Required]
-    public double right { get; set; }
+    public double Right { get; set; }
 
     [Required]
     public OperationType Operand { get; set; }

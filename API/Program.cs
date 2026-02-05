@@ -18,6 +18,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<CalculatorService>();
 
 var app = builder.Build();
+// Add the exception handling middleware so that it can catch exceptions from all controllers
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();
 // Configure the HTTP request pipeline.
