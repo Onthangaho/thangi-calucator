@@ -11,7 +11,7 @@ public class ExceptionHandlingMiddleware
         
         _next =next;
     }
-    private static async Task<Task> HandleExceptionAsync(HttpContext context, Exception exception)
+    private static  Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         
         var response = context.Response;
@@ -34,7 +34,7 @@ public class ExceptionHandlingMiddleware
         return response.WriteAsync(JsonSerializer.Serialize(payload));//serialize the payload object to JSON and write it to the response body
     }
 
-    public async Task InvokeAync(HttpContext context)// context =request/ response
+    public async Task InvokeAsync(HttpContext context)// context =request/ response
     {
         try
         {
