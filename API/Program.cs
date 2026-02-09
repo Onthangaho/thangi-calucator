@@ -19,7 +19,7 @@ builder.Services.AddSingleton<ICalculationStore>(
 builder.Services.AddScoped<CalculatorService>();
 // Add services to the container.
 builder.Services.AddDbContext<CalculatorDbContext>(options=> 
-options.UseSqlite("Data source=Calculator.db"));
+options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 .AddEntityFrameworkStores<CalculatorDbContext>()

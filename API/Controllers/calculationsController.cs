@@ -1,6 +1,7 @@
 using thangi_calucator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using API.Persistence;
 
 
 
@@ -11,10 +12,12 @@ namespace API.controllers
     public class CalculationsController : ControllerBase
     {
         private readonly CalculatorService _calculator;
+        private readonly EFCalculationsStore _calculatorStore;
 
-        public CalculationsController(CalculatorService calculator)
+        public CalculationsController(CalculatorService calculator, EFCalculationsStore calculatorStore)
         {
             _calculator = calculator;
+            _calculatorStore = calculatorStore;
         }
 
         /*  [HttpGet] //GET /api/calculations
@@ -33,6 +36,7 @@ namespace API.controllers
                 dto.Operand
                 );
             var calculation = await _calculator.CalculateAsync(request);
+            await _calculatorStore.SaveAsync(calculation);
 
             var response = new CalculationResultDto
             {
