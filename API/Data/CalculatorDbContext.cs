@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using API.Auth;
 using Microsoft.EntityFrameworkCore;
 using thangi_calucator;
+using Microsoft.AspNetCore.Identity;
 
-public class CalculatorDbContext : DbContext
+public class CalculatorDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
 {
        
        /* this class is responsible for managing the database connection and providing access to the Calculations table so that we can perform CRUD operations on it. 

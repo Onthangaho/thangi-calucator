@@ -2,6 +2,7 @@ using thangi_calucator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using API.Persistence;
+using thangi_calucator.Persistence;
 
 
 
@@ -12,9 +13,9 @@ namespace API.controllers
     public class CalculationsController : ControllerBase
     {
         private readonly CalculatorService _calculator;
-        private readonly EFCalculationsStore _calculatorStore;
+        private readonly ICalculationStore _calculatorStore;
 
-        public CalculationsController(CalculatorService calculator, EFCalculationsStore calculatorStore)
+        public CalculationsController(CalculatorService calculator, ICalculationStore calculatorStore)
         {
             _calculator = calculator;
             _calculatorStore = calculatorStore;

@@ -7,16 +7,18 @@ using API.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using API.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
-var dataDirectory = Path.Combine(
+/*var dataDirectory = Path.Combine(
     builder.Environment.ContentRootPath, "Data");
 
 builder.Services.AddSingleton<ICalculationStore>(
     new FileCalculationStore(dataDirectory)
 
-);
-builder.Services.AddScoped<CalculatorService>();
+);*/
+builder.Services.AddScoped<ICalculationStore,EFCalculationsStore>();
+
 // Add services to the container.
 builder.Services.AddDbContext<CalculatorDbContext>(options=> 
 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -31,7 +33,7 @@ builder.Services.AddSwaggerGen();
 /* Register the CalculatorService as a singleton so that it can be injected into controllers and other services throughout the application. 
 This allows us to use the same instance of the CalculatorService across the entire application,
  which can help improve performance and reduce memory usage. By registering it as a singleton*/
-builder.Services.AddSingleton<CalculatorService>();
+builder.Services.AddScoped<CalculatorService>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -50,7 +52,7 @@ builder.Services.AddAuthentication(options =>
 
         ValidIssuer=jwt["Issuer"],
         ValidAudience=jwt["Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"]!))
 
     };
 });
